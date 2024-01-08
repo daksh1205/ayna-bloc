@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ayna_bloc/models/post.dart';
 import 'package:ayna_bloc/services/api_service.dart';
 import 'package:ayna_bloc/bloc/post_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PostsScreen extends StatelessWidget {
   @override
@@ -11,7 +12,8 @@ class PostsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Posts',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: BlocProvider(
         create: (context) =>
@@ -19,7 +21,7 @@ class PostsScreen extends StatelessWidget {
         child: BlocBuilder<PostBloc, PostState>(
           builder: (context, state) {
             if (state is PostsLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (state is PostsLoaded) {
               return ListView.builder(
@@ -28,15 +30,17 @@ class PostsScreen extends StatelessWidget {
                   Post post = state.posts[index];
                   return ListTile(
                     title: Text(post.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold)),
-                    subtitle: Text(post.body),
+                    subtitle: Text(
+                      post.body,
+                    ),
                   );
                 },
               );
             }
             if (state is PostsError) {
-              return Center(child: Text('Failed to fetch posts'));
+              return const Center(child: Text('Failed to fetch posts'));
             }
             return Container(); // Initial state
           },

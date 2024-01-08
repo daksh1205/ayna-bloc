@@ -2,10 +2,13 @@
 import 'package:ayna_bloc/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import '../bloc/dog_image_bloc.dart'; // Import DogImageBloc
 
 class MyScreen extends StatefulWidget {
+  const MyScreen({super.key});
+
   @override
   _MyScreenState createState() => _MyScreenState();
 }
@@ -24,7 +27,8 @@ class _MyScreenState extends State<MyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Doggies",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: BlocBuilder<DogImageBloc, DogImageState>(
         bloc: _dogImageBloc,
